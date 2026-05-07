@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="TransactionalDBCM"
+  DTS:DTSID="{711B62D4-3C53-4CCB-B797-533616751820}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::TransactionalDBCM_ServerName]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=localhost;Initial Catalog=library_transactional;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-UploadOLTP_toStaging-{711B62D4-3C53-4CCB-B797-533616751820}localhost.library_transactional;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
