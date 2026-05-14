@@ -11,8 +11,8 @@
   DTS:LocaleID="5130"
   DTS:ObjectName="UploadOLTP_toStaging"
   DTS:PackageType="5"
-  DTS:VersionBuild="88"
-  DTS:VersionGUID="{FD84516D-0803-4E2C-9943-E54D9E18E949}">
+  DTS:VersionBuild="112"
+  DTS:VersionGUID="{3925B9E9-35FE-4E50-B876-1B9F09E782B2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -469,6 +469,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\CDC Source - Book.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\CDC Source - Book.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -554,8 +643,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\CDC Source - Book.Outputs[Output]" />
               </paths>
@@ -894,6 +988,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\CDC Source - BookGenre.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\CDC Source - BookGenre.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -979,8 +1162,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\CDC Source - BookGenre.Outputs[Output]" />
               </paths>
@@ -1427,6 +1615,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\CDC Source - Client.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\CDC Source - Client.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -1568,8 +1845,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\CDC Source - Client.Outputs[Output]" />
               </paths>
@@ -1977,11 +2259,105 @@
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Destination - STG CustomerOrder.Inputs[OLE DB Destination Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder.Outputs[Output]" />
               </paths>
@@ -2320,6 +2696,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\CDC Source - Genre.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\CDC Source - Genre.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -2405,8 +2870,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\CDC Source - Genre.Outputs[Output]" />
               </paths>
@@ -2839,6 +3309,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\CDC Source - Item.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\CDC Source - Item.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -2952,8 +3511,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\CDC Source - Item.Outputs[Output]" />
               </paths>
@@ -3412,11 +3976,105 @@
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Destination - STG OrderDetail.Inputs[OLE DB Destination Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail.Outputs[Output]" />
               </paths>
@@ -3755,6 +4413,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\CDC Source - Publisher.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\CDC Source - Publisher.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -3840,8 +4587,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\CDC Source - Publisher.Outputs[Output]" />
               </paths>
@@ -4207,6 +4959,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\CDC Source - Service.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\CDC Source - Service.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -4292,8 +5133,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\CDC Source - Service.Outputs[Output]" />
               </paths>
@@ -4632,6 +5478,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\CDC Source - ServiceType.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\CDC Source - ServiceType.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -4717,8 +5652,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\CDC Source - ServiceType.Outputs[Output]" />
               </paths>
@@ -5057,6 +5997,95 @@
                   </outputs>
                 </component>
                 <component
+                  refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Only INSERT"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input].Columns[__$operation]"
+                          cachedDataType="i4"
+                          cachedName="__$operation"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\CDC Source - Status.Outputs[Output].Columns[__$operation]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[onlyINSERT]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="onlyINSERT"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">#{Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\CDC Source - Status.Outputs[Output].Columns[__$operation]} == 2</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">__$operation == 2</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
                   refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Unicode to ASCII"
                   componentClassID="Microsoft.DataConvert"
                   contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
@@ -5142,8 +6171,13 @@
                   name="Data Conversion Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Unicode to ASCII.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Output]"
+                  refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[onlyINSERT]"
                   endId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Unicode to ASCII.Inputs[Data Conversion Input]"
+                  name="onlyINSERT"
+                  startId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Outputs[onlyINSERT]" />
+                <path
+                  refId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Output]"
+                  endId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT.Inputs[Conditional Split Input]"
                   name="Output"
                   startId="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\CDC Source - Status.Outputs[Output]" />
               </paths>
@@ -5346,63 +6380,87 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="194,42"
+          Size="197,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Only INSERT"
+          TopLeft="103.916666666667,121" />
+        <NodeLayout
+          Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="103.916666666667,192" />
         <NodeLayout
-          Size="194,42"
+          Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\CDC Source - Book"
-          TopLeft="103.666666666667,50" />
+          TopLeft="103.916666666667,50" />
         <NodeLayout
-          Size="194,42"
+          Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)\Destination - STG Book"
-          TopLeft="103.666666666667,192" />
+          TopLeft="103.916666666667,263" />
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[Output]"
-          TopLeft="200.666666666667,92">
+          TopLeft="202.416666666667,92">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.5"
+              EndConnector="0,29"
               Start="0,0"
-              End="0,21">
+              End="0,21.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21" />
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[onlyINSERT]"
+          TopLeft="202.416666666667,163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,4.9453125,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="200.666666666667,162.5">
+          TopLeft="202.416666666667,234">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,29"
               Start="0,0"
-              End="0,22">
+              End="0,21.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5437,60 +6495,84 @@
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="106.916666666667,183" />
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Destination - STG Client"
-          TopLeft="103.666666666667,192" />
+          TopLeft="106.916666666667,250" />
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\CDC Source - BookGenre"
-          TopLeft="103.666666666667,49" />
+          TopLeft="106.916666666667,49" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Output]"
-          TopLeft="206.666666666667,91">
+          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="209.916666666667,225">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25"
               Start="0,0"
-              End="0,22">
+              End="0,17.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,17.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)\Only INSERT"
+          TopLeft="106.916666666667,116" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Output]"
+          TopLeft="209.916666666667,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="206.666666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB).Paths[onlyINSERT]"
+          TopLeft="209.916666666667,158">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25"
               Start="0,0"
-              End="0,22">
+              End="0,17.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,17.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,2.9453125,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5525,62 +6607,86 @@
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="197,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Only INSERT"
+          TopLeft="111.5,121" />
+        <NodeLayout
+          Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="111.5,193" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\Destination - STG Client"
-          TopLeft="103.666666666667,192" />
+          TopLeft="111.5,265" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)\CDC Source - Client"
-          TopLeft="103.666666666667,49" />
+          TopLeft="111.5,49" />
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[Output]"
-          TopLeft="202.166666666667,91">
+          TopLeft="210,91">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,30"
               Start="0,0"
-              End="0,22">
+              End="0,22.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[onlyINSERT]"
+          TopLeft="210,163">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,5.4453125,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="202.166666666667,162.5">
+          TopLeft="210,235">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,30"
               Start="0,0"
-              End="0,22">
+              End="0,22.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,22.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5611,35 +6717,63 @@
     design-time-name="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="245,42"
           Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Destination - STG CustomerOrder"
-          TopLeft="104.166666666667,132" />
+          TopLeft="115.833333333334,183" />
         <NodeLayout
           Size="245,42"
           Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder"
-          TopLeft="104.166666666667,49" />
+          TopLeft="115.833333333334,49" />
+        <NodeLayout
+          Size="245,42"
+          Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Only INSERT"
+          TopLeft="115.833333333334,116" />
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB).Paths[Output]"
-          TopLeft="226.666666666667,91">
+          TopLeft="238.333333333334,91">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41"
+              EndConnector="0,25"
               Start="0,0"
-              End="0,33.5">
+              End="0,17.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.5" />
+                    End="0,17.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB).Paths[onlyINSERT]"
+          TopLeft="238.333333333334,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.818203125,2.9453125,53.63640625,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5674,60 +6808,84 @@
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="103.916666666667,189" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Destination - STG Client"
-          TopLeft="103.666666666667,192" />
+          TopLeft="103.916666666667,259" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\CDC Source - Genre"
-          TopLeft="103.666666666667,49" />
+          TopLeft="103.916666666667,49" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Output]"
-          TopLeft="202.166666666667,91">
+          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="202.416666666667,231">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,28"
               Start="0,0"
-              End="0,22">
+              End="0,20.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,20.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="197,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)\Only INSERT"
+          TopLeft="103.916666666667,119" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Output]"
+          TopLeft="202.416666666667,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="202.166666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB).Paths[onlyINSERT]"
+          TopLeft="202.416666666667,161">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,28"
               Start="0,0"
-              End="0,22">
+              End="0,20.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,20.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,4.4453125,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5763,29 +6921,33 @@
         <NodeLayout
           Size="191,42"
           Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Destination - STG Item"
-          TopLeft="103.666666666667,192" />
+          TopLeft="102.666666666667,258" />
         <NodeLayout
-          Size="191,42"
-          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          Size="197,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Only INSERT"
+          TopLeft="99.666666666667,118.666666666667" />
         <NodeLayout
           Size="191,42"
           Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\CDC Source - Item"
-          TopLeft="103.666666666667,49" />
+          TopLeft="102.666666666667,49" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)\Unicode to ASCII"
+          TopLeft="102.666666666667,188.333333333333" />
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[Output]"
-          TopLeft="199.166666666667,91">
+          TopLeft="198.166666666667,91">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,27.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,20.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,20.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5797,19 +6959,43 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="199.166666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[onlyINSERT]"
+          TopLeft="198.166666666667,160.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,27.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,20.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,20.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.818203125,4.27864583333333,53.63640625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="198.166666666667,230.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.6666666666667"
+              Start="0,0"
+              End="0,20.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5848,35 +7034,63 @@
     design-time-name="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="226,42"
           Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Destination - STG OrderDetail"
-          TopLeft="104.166666666667,122" />
+          TopLeft="108.833333333334,192" />
         <NodeLayout
           Size="226,42"
           Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail"
-          TopLeft="104.166666666667,49" />
+          TopLeft="108.833333333334,49" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Only INSERT"
+          TopLeft="108.833333333334,120.5" />
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB).Paths[Output]"
-          TopLeft="217.166666666667,91">
+          TopLeft="221.833333333334,91">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31"
+              EndConnector="0,29.5"
               Start="0,0"
-              End="0,23.5">
+              End="0,22">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5" />
+                    End="0,22" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB).Paths[onlyINSERT]"
+          TopLeft="221.833333333334,162.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.5"
+              Start="0,0"
+              End="0,22">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.818203125,5.1953125,53.63640625,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5910,62 +7124,86 @@
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="197,42"
-          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,121.5" />
+          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Only INSERT"
+          TopLeft="113.916666666667,125.666666666667" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Destination - STG Client"
-          TopLeft="103.666666666667,192" />
+          TopLeft="113.916666666667,281" />
         <NodeLayout
           Size="197,42"
           Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\CDC Source - Publisher"
-          TopLeft="102.666666666667,48" />
+          TopLeft="113.916666666667,48" />
+        <NodeLayout
+          Size="197,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)\Unicode to ASCII"
+          TopLeft="113.916666666667,203.333333333333" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[Output]"
-          TopLeft="201.666666666667,90">
+          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[onlyINSERT]"
+          TopLeft="212.416666666667,167.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,31.5"
+              EndConnector="0,35.6666666666667"
               Start="0,0"
-              End="0,24">
+              End="0,28.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24" />
+                    End="0,28.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,8.27864583333333,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="202.166666666667,163.5">
+          TopLeft="212.416666666667,245.333333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.5"
+              EndConnector="0,35.6666666666667"
               Start="0,0"
-              End="0,21">
+              End="0,28.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21" />
+                    End="0,28.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB).Paths[Output]"
+          TopLeft="212.416666666667,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.6666666666667"
+              Start="0,0"
+              End="0,28.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -6000,60 +7238,84 @@
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="105.166666666667,184.333333333333" />
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\CDC Source - Service"
-          TopLeft="103.666666666667,49" />
+          TopLeft="105.166666666667,49" />
         <NodeLayout
           Size="206,42"
           Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Destination - STG Service"
-          TopLeft="103.666666666667,192" />
+          TopLeft="105.166666666667,252" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Output]"
-          TopLeft="206.666666666667,91">
+          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="208.166666666667,226.333333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,18.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,18.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)\Only INSERT"
+          TopLeft="105.166666666667,116.666666666667" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Output]"
+          TopLeft="208.166666666667,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.6666666666667"
+              Start="0,0"
+              End="0,18.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="206.666666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB).Paths[onlyINSERT]"
+          TopLeft="208.166666666667,158.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,18.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,18.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,3.27864583333333,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -6089,60 +7351,84 @@
         <NodeLayout
           Size="230,42"
           Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="110.416666666667,184.333333333333" />
         <NodeLayout
           Size="230,42"
           Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Destination - STG ServiceType"
-          TopLeft="103.666666666667,192" />
+          TopLeft="110.416666666667,252" />
         <NodeLayout
           Size="230,42"
           Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\CDC Source - ServiceType"
-          TopLeft="103.666666666667,49" />
+          TopLeft="110.416666666667,49" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Output]"
-          TopLeft="218.666666666667,91">
+          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="225.416666666667,226.333333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,18.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,18.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)\Only INSERT"
+          TopLeft="110.416666666667,116.666666666667" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Output]"
+          TopLeft="225.416666666667,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.6666666666667"
+              Start="0,0"
+              End="0,18.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="218.666666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB).Paths[onlyINSERT]"
+          TopLeft="225.416666666667,158.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,25.6666666666667"
               Start="0,0"
-              End="0,22">
+              End="0,18.1666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,18.1666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,3.27864583333333,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -6178,60 +7464,84 @@
         <NodeLayout
           Size="200,42"
           Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Unicode to ASCII"
-          TopLeft="103.666666666667,120.5" />
+          TopLeft="104.916666666667,179.666666666667" />
         <NodeLayout
           Size="200,42"
           Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Destination - STG Status"
-          TopLeft="103.666666666667,192" />
+          TopLeft="104.916666666667,245" />
         <NodeLayout
           Size="200,42"
           Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\CDC Source - Status"
-          TopLeft="103.666666666667,49" />
+          TopLeft="104.916666666667,49" />
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Output]"
-          TopLeft="203.666666666667,91">
+          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Data Conversion Output]"
+          TopLeft="204.916666666667,221.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,23.3333333333333"
               Start="0,0"
-              End="0,22">
+              End="0,15.8333333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,15.8333333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200,42"
+          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)\Only INSERT"
+          TopLeft="104.916666666667,114.333333333333" />
+        <EdgeLayout
+          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Output]"
+          TopLeft="204.916666666667,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.3333333333333"
+              Start="0,0"
+              End="0,15.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[Data Conversion Output]"
-          TopLeft="203.666666666667,162.5">
+          Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB).Paths[onlyINSERT]"
+          TopLeft="204.916666666667,156.333333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29.5"
+              EndConnector="0,23.3333333333333"
               Start="0,0"
-              End="0,22">
+              End="0,15.8333333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22" />
+                    End="0,15.8333333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
+              BoundingBox="-26.818203125,2.11197916666667,53.63640625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>

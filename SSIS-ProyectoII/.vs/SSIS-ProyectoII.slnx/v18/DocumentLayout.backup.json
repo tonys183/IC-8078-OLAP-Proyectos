@@ -1,12 +1,52 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EED298AD-D801-8D90-2734-D40EB557D07A}|SSIS-ProyectoII\\SSIS-ProyectoII.dtproj|C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EED298AD-D801-8D90-2734-D40EB557D07A}|SSIS-ProyectoII\\SSIS-ProyectoII.dtproj|solutionrelative:SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EED298AD-D801-8D90-2734-D40EB557D07A}|SSIS-ProyectoII\\SSIS-ProyectoII.dtproj|C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EED298AD-D801-8D90-2734-D40EB557D07A}|SSIS-ProyectoII\\SSIS-ProyectoII.dtproj|solutionrelative:SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UploadOLTP_toStaging.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx",
+              "RelativeDocumentMoniker": "SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx [Design]",
+              "RelativeToolTip": "SSIS-ProyectoII\\UploadOLTP_toStaging.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFkSURBVDhPjVO/S8NAGH2RtvSPaPeSwUVchS6CexYRJCBYUJC6SEFBBIXiIigKEYRSCC4unQTXDsVipkpbUJHSRTQ2/oimNCTnkOTMXdrqg4Pv\u002B\u002B69ly933wkAoFaqBGPQezdx9/CYO9xZOWU2CPF0aqVKXMcZuY7Kl2R6bomsbZ8sMwYAJvjCKOxtraNW1xTe5N8Gm7sHAIBaXVPC9Vg4KZSaNC7KIs0/jQQW5yUAQPn8gnIwrAM7nYGdzjB5cnIGqwuzDC9AxCDebSPebUdyc8DQWPx1Cx\u002BWQzrG722EtZEOeJgDwOgDukUQSyT5bdagUGrSBU6sW4A7ZNwiHQSHGBa/fANvFuDafZ4eNQgOLSx\u002B/gK06xa6dgpZKY\u002BNswbBlELAz0FRFumXjT7Bq\u002BXFpu31XpRFdJ5M3N73sO9rqMGxehWEI5Ci4puWTqsx\u002BK\u002BNnzAeWSlPxWEDgWGNg//PDLSc8AOMxO8cPcnGpQAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-05-14T19:06:15.655Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormatAndUpload_toDatamart.dtsx [Design]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx",
+              "RelativeDocumentMoniker": "SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx",
+              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\SSIS-ProyectoII\\SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx [Design]",
+              "RelativeToolTip": "SSIS-ProyectoII\\FormatAndUpload_toDatamart.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFkSURBVDhPjVO/S8NAGH2RtvSPaPeSwUVchS6CexYRJCBYUJC6SEFBBIXiIigKEYRSCC4unQTXDsVipkpbUJHSRTQ2/oimNCTnkOTMXdrqg4Pv\u002B\u002B69ly933wkAoFaqBGPQezdx9/CYO9xZOWU2CPF0aqVKXMcZuY7Kl2R6bomsbZ8sMwYAJvjCKOxtraNW1xTe5N8Gm7sHAIBaXVPC9Vg4KZSaNC7KIs0/jQQW5yUAQPn8gnIwrAM7nYGdzjB5cnIGqwuzDC9AxCDebSPebUdyc8DQWPx1Cx\u002BWQzrG722EtZEOeJgDwOgDukUQSyT5bdagUGrSBU6sW4A7ZNwiHQSHGBa/fANvFuDafZ4eNQgOLSx\u002B/gK06xa6dgpZKY\u002BNswbBlELAz0FRFumXjT7Bq\u002BXFpu31XpRFdJ5M3N73sO9rqMGxehWEI5Ci4puWTqsx\u002BK\u002BNnzAeWSlPxWEDgWGNg//PDLSc8AOMxO8cPcnGpQAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-05-14T19:05:42.156Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
