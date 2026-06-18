@@ -11,8 +11,8 @@
   DTS:LocaleID="5130"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{28250A41-4C79-4367-A019-DF4B93B0C30E}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{FF45EFFF-F3E2-486C-8072-7A8167766ED1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -3192,45 +3192,45 @@ FROM (
       DTS:To="Package\Sequence Container - Load Dimensions" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="224,42"
+          Size="224,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)"
           TopLeft="58,26" />
         <NodeLayout
-          Size="217,42"
+          Size="216.8,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimItem - DTM (DB)"
           TopLeft="58,97" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="348,194"
-          Size="348,237"
+          PanelSize="348,193.6"
+          Size="348,236.8"
           Id="Package\Sequence Container - Load Dimensions"
           TopLeft="101.666666666667,146" />
         <NodeLayout
-          Size="225,42"
+          Size="224.8,41.6"
           Id="Package\Sequence Container - Load Fact Table\Upload FactSales - DTM (DB)"
           TopLeft="33,25" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="297,101"
-          Size="297,144"
+          PanelSize="296.8,100.8"
+          Size="296.8,144"
           Id="Package\Sequence Container - Load Fact Table"
           TopLeft="127.166666666667,462.5" />
         <NodeLayout
-          Size="224,42"
+          Size="224,41.6"
           Id="Package\Upload DimTime - DTM (DB)"
           TopLeft="163.666666666667,46" />
         <EdgeLayout
@@ -3286,25 +3286,25 @@ FROM (
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)\Format LastNames"
           TopLeft="149,152.5" />
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)\Source - STG Client"
           TopLeft="149,63" />
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)\Unicode to ASCII"
           TopLeft="149,242" />
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)\Lookup - New Clients"
           TopLeft="149,331.5" />
         <NodeLayout
-          Size="199,42"
+          Size="199.2,41.6"
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB)\Destination - DTM Client"
-          TopLeft="149,421" />
+          TopLeft="148.285714284194,421" />
         <EdgeLayout
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB).Paths[Data Conversion Output]"
           TopLeft="248.5,284">
@@ -3324,9 +3324,7 @@ FROM (
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3348,32 +3346,30 @@ FROM (
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Sequence Container - Load Dimensions\Upload DimClient - DTM (DB).Paths[Lookup No Match Output]"
-          TopLeft="248.5,373.5">
+          TopLeft="248.242857142097,373.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.5"
+              EndConnector="0,47.8999999999999"
               Start="0,0"
-              End="0,40">
+              End="0,40.3999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,40" />
+                    End="0,40.3999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,14.1953125,111.6127734375,11.609375"
+              BoundingBox="-55.80638671875,14.3953125,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -3396,9 +3392,7 @@ FROM (
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3747,7 +3741,7 @@ FROM (
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>

@@ -52,7 +52,7 @@
           <ConfigurationSetting>
             <Id>Library Data Warehouse</Id>
             <Name>Library Data Warehouse</Name>
-            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=library_data_warehouse</Value>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI11.1;Data Source=SAUL\MSSQLSERVER2019;Integrated Security=SSPI;Initial Catalog=library_data_warehouse</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>

@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">TONY</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAtM6DAjhN0EiUSgKvXXzSSgAAAAACAAAAAAAQZgAAAAEAACAAAACaGqZwm3WLwc0c0Bnmc9Lh4qcajJz1ICOqebyGL0ejaAAAAAAOgAAAAAIAACAAAABSXTSDlWher8C02yYcsE5FArz+6RElVu1nY7nkD5zgDpAAAACGDDcYVdukkbpMjeHbzCUi/2Q1mCWuEidm7/DGmCPM5AyvrYvkaKYMD7HWbSdUW+2hNXQPeqaoF/a6QQb4v7GPl/bsYRC68bCMl4xHESO0KQeARAwfpikaR6Rqm4k3zGov/ZNr50MJXl+ioL193LpNkIr28Bj/8CnePH6eKffP+rFDmY/rjeYk8Fsasaqv6JZAAAAAMSolVsHbu6AwIvgZyCd39pV3nuiZnwGGMQCyEKBbAoiF7UVOIz1ewaMtunem6ovreGaFhGJ9JK8hzPIoBe/m6A==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA2eu9rLbmJUiyZ7jnSwAoRAAAAAACAAAAAAAQZgAAAAEAACAAAAAobwMfAWko929ccygx8njmGb6JK9aSeJONqAKwHG3GywAAAAAOgAAAAAIAACAAAAA2D3fTzpJECH4tNSfynikkAe0aph5bvderU4L0EYQYK5AAAABKB5697072h+AeUg1gBEjjyStwjY9FIIWHfHOHSodiGyAjQcDITqbeLgBYqEiorubpBYqhUt1Dmr+6i/SDJyBlJ8/o9bcGOsnmvLtuu4A1On95LV5/yuZRZHal/L3XbDjGwgZfe7jyywpRfBBKZoDR+4rRMfPNLzrjwoS1ZA6fBJ9ob/gVEVx+cXF9VG1UBepAAAAAx6k8wnJT6W9rR3icAMVRutlSKf3IsE4qoe7UwxmEwpepD5JhHbKAsLYRU/pTuQ4b4JEJM4st/9O4qIrvkAPtwQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -65,7 +65,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=library_transactional;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-UploadOLTP_toStaging-{711B62D4-3C53-4CCB-B797-533616751820}localhost.library_transactional;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=library_transactional;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-UploadOLTP_toStaging-{711B62D4-3C53-4CCB-B797-533616751820}localhost.library_transactional;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -198,7 +198,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=library_data_warehouse;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-UploadOLTP_toStaging-{187C296E-23EE-4DDC-B8EF-988679918182}localhost.library_data_warehouse;Auto Translate=False;</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=library_data_warehouse;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-UploadOLTP_toStaging-{187C296E-23EE-4DDC-B8EF-988679918182}localhost.library_data_warehouse;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -330,10 +330,10 @@
                 <SSIS:Property SSIS:Name="Name">UploadOLTP_toStaging</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">112</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">116</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{3925B9E9-35FE-4E50-B876-1B9F09E782B2}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{90487026-A0E2-4C34-B0EB-EDBB0499C355}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

@@ -1,14 +1,14 @@
 ﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
   <Target>
     <Database>SSAS-ProyectoIII</Database>
-    <Server>localhost</Server>
-    <ConnectionString>Data Source=localhost;Timeout=0</ConnectionString>
+    <Server>SAUL\MSSQLSERVER2019</Server>
+    <ConnectionString>Data Source=SAUL\MSSQLSERVER2019;Timeout=0</ConnectionString>
   </Target>
   <Options>
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -19,42 +19,42 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>lxUwzOA+7KKPvF+SjMcK2dBll6s=5/6/2026 8:41:47 p. m.5/6/2026 8:10:03 p. m.</TimeStamp>
+        <TimeStamp>0l6704lFnhZi0G5CRV7C0BdiaCY=15/6/2026 19:54:5315/6/2026 19:38:24</TimeStamp>
         <ID>
           <String>Library Data Warehouse</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>cxCl0Jz6odbYJimIjzPOcFKNVEA=5/6/2026 8:10:29 p. m.5/6/2026 8:10:28 p. m.</TimeStamp>
+        <TimeStamp>94/KtSPP3UThfCEGZJcIHOKBjyw=17/6/2026 23:09:3715/6/2026 18:05:41</TimeStamp>
         <ID>
           <String>Library Data Warehouse</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>3HFw2V731jQe+oY3GzqNmnB3xVs=5/6/2026 8:50:02 p. m.5/6/2026 8:11:08 p. m.</TimeStamp>
+        <TimeStamp>wAZTp3T8YCbyTg+O/9Oli/j9ByA=15/6/2026 23:12:2515/6/2026 18:05:41</TimeStamp>
         <ID>
           <String>Dim Time</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>BR3yjAKnD+6VwOMc/H+JKBGBAT4=5/6/2026 8:29:28 p. m.5/6/2026 8:11:08 p. m.</TimeStamp>
+        <TimeStamp>r1a8NcbzYLGw4nuHQxrGk/xGO5s=17/6/2026 23:09:3715/6/2026 19:22:27</TimeStamp>
         <ID>
           <String>Dim Client</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>5cMknt37UVNBV7aCOsD/f+Zmjn4=5/6/2026 8:54:08 p. m.5/6/2026 8:11:08 p. m.</TimeStamp>
+        <TimeStamp>+zAXimXVkmTAjQvNhDClISz8PgY=17/6/2026 21:59:3715/6/2026 18:05:41</TimeStamp>
         <ID>
           <String>Dim Item</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>0t9r6HRtUaBNkFEqCSb0L+KEH6Q=5/6/2026 8:32:00 p. m.5/6/2026 8:11:08 p. m.LWllJGuRdoLF3J1eJj4HT0BVc9E=5/6/2026 8:11:08 p. m.5/6/2026 8:11:08 p. m.</TimeStamp>
+        <TimeStamp>zk1Gl1dqytxkcB1qOdelYksd5r0=17/6/2026 23:09:3715/6/2026 19:35:57eRmalGt/XHFVrXRiPss1VUKRZFA=15/6/2026 18:05:4115/6/2026 18:05:41</TimeStamp>
         <ID>
           <String>Cube Library Data Warehouse</String>
         </ID>
@@ -62,7 +62,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>h47lntVQAbB6pyLMCe2kK1vJYKw=5/6/2026 8:09:09 p. m.5/6/2026 8:09:09 p. m.</TimeStamp>
+      <TimeStamp>oBBfez6Uus4juXcIbK3ZadtFo7g=15/6/2026 18:05:4115/6/2026 18:05:41</TimeStamp>
       <ID>
         <String>SSAS-ProyectoIII</String>
       </ID>
@@ -71,5 +71,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2026-06-06T02:54:13.853333Z</LastDeployed>
+  <LastDeployed>2026-06-18T05:09:49.056667Z</LastDeployed>
 </DeploymentSnapshot>

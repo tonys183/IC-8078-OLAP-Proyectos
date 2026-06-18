@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Usuario\\source\\repos\\SSAS-ProyectoIII\\",
+  "WorkspaceRootPath": "C:\\Users\\saulp\\OneDrive\\Escritorio\\Saul\\Materias\\OLAP\\IC-8078-OLAP-Proyectos\\ProyectoIII\\SSAS-ProyectoIII\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1160E061-7A82-AB7E-622D-365CCBA7BEDF}|SSAS-ProyectoIII\\SSAS-ProyectoIII.dwproj|C:\\Users\\Usuario\\source\\repos\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "AbsoluteMoniker": "D:0:0:{1160E061-7A82-AB7E-622D-365CCBA7BEDF}|SSAS-ProyectoIII\\SSAS-ProyectoIII.dwproj|C:\\Users\\saulp\\OneDrive\\Escritorio\\Saul\\Materias\\OLAP\\IC-8078-OLAP-Proyectos\\ProyectoIII\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
       "RelativeMoniker": "D:0:0:{1160E061-7A82-AB7E-622D-365CCBA7BEDF}|SSAS-ProyectoIII\\SSAS-ProyectoIII.dwproj|solutionrelative:SSAS-ProyectoIII\\Cube Library Data Warehouse.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
     }
   ],
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Cube Library Data Warehouse.cube [Design]",
-              "DocumentMoniker": "C:\\Users\\Usuario\\source\\repos\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube",
+              "Title": "Cube Library Data Warehouse.cube [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\saulp\\OneDrive\\Escritorio\\Saul\\Materias\\OLAP\\IC-8078-OLAP-Proyectos\\ProyectoIII\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube",
               "RelativeDocumentMoniker": "SSAS-ProyectoIII\\Cube Library Data Warehouse.cube",
-              "ToolTip": "C:\\Users\\Usuario\\source\\repos\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube [Design]",
-              "RelativeToolTip": "SSAS-ProyectoIII\\Cube Library Data Warehouse.cube [Design]",
+              "ToolTip": "C:\\Users\\saulp\\OneDrive\\Escritorio\\Saul\\Materias\\OLAP\\IC-8078-OLAP-Proyectos\\ProyectoIII\\SSAS-ProyectoIII\\SSAS-ProyectoIII\\Cube Library Data Warehouse.cube [Dise\u00F1o]",
+              "RelativeToolTip": "SSAS-ProyectoIII\\Cube Library Data Warehouse.cube [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-06-06T03:05:01.209Z",
-              "EditorCaption": " [Design]"
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }

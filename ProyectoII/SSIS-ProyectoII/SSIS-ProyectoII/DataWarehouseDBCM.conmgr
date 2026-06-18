@@ -9,6 +9,6 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=localhost;Initial Catalog=library_data_warehouse;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-UploadOLTP_toStaging-{187C296E-23EE-4DDC-B8EF-988679918182}localhost.library_data_warehouse;Auto Translate=False;" />
+      DTS:ConnectionString="Data Source=SAUL\MSSQLSERVER2019;Initial Catalog=library_data_warehouse;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-UploadOLTP_toStaging-{187C296E-23EE-4DDC-B8EF-988679918182}localhost.library_data_warehouse;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

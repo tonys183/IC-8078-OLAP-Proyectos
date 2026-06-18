@@ -2,18 +2,18 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>SSIS-ProyectoII</Name>
-    <LastWriteTime>2026-05-07T05:44:35.4936179Z</LastWriteTime>
+    <LastWriteTime>2026-06-16T00:05:41.2238583Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>FormatAndUpload_toDatamart.dtsx</Name>
-      <LastWriteTime>2026-05-07T18:48:36.0678869Z</LastWriteTime>
+      <LastWriteTime>2026-06-16T00:05:41.2238583Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>UploadOLTP_toStaging.dtsx</Name>
-      <LastWriteTime>2026-05-14T19:05:08.9110601Z</LastWriteTime>
+      <LastWriteTime>2026-06-16T03:25:07.7860557Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

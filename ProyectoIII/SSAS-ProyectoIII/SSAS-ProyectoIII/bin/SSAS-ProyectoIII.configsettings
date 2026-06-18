@@ -3,7 +3,7 @@
     <DataSources>
       <DataSource>
         <ID>Library Data Warehouse</ID>
-        <ConnectionString>Provider=SQLNCLI11.1;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=library_data_warehouse</ConnectionString>
+        <ConnectionString>Provider=SQLNCLI11.1;Data Source=SAUL\MSSQLSERVER2019;Integrated Security=SSPI;Initial Catalog=library_data_warehouse</ConnectionString>
         <ImpersonationInfo>
           <ImpersonationMode xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ImpersonateServiceAccount</ImpersonationMode>
           <ImpersonationInfoSecurity xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">Unchanged</ImpersonationInfoSecurity>

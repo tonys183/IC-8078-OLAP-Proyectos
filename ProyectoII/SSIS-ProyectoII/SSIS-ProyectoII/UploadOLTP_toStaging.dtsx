@@ -11,8 +11,8 @@
   DTS:LocaleID="5130"
   DTS:ObjectName="UploadOLTP_toStaging"
   DTS:PackageType="5"
-  DTS:VersionBuild="112"
-  DTS:VersionGUID="{3925B9E9-35FE-4E50-B876-1B9F09E782B2}">
+  DTS:VersionBuild="116"
+  DTS:VersionGUID="{90487026-A0E2-4C34-B0EB-EDBB0499C355}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -88,7 +88,7 @@
       <DTS:ObjectData>
         <CDCControlTask
           Connection="ADO-TransactionalDBCM"
-          TaskOperation="GetProcessingRange"
+          TaskOperation="MarkCdcStart"
           OperationParameter=""
           StateConnection="ADO-DataWarehouseDBCM"
           StateVariable="User::CDC_State"
@@ -6231,102 +6231,80 @@
       DTS:To="Package\CDC Load Start" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="206,42"
+          Size="206.4,41.6"
           Id="Package\CDC Load End"
           TopLeft="260.654761904762,746.107142857144" />
         <NodeLayout
-          Size="206,42"
+          Size="206.4,41.6"
           Id="Package\CDC Load Start"
           TopLeft="260.654761904762,104.218253968254" />
         <NodeLayout
-          Size="220,42"
+          Size="220,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Book - STG (DB)"
           TopLeft="23.1545454545455,150.242424242424" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload BookGenre - STG (DB)"
           TopLeft="299.7,24.3333333333333" />
         <NodeLayout
-          Size="220,42"
+          Size="220,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Client - STG (DB)"
           TopLeft="23.1545454545455,22.2424242424242" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)"
           TopLeft="300.7,223.333333333333" />
         <NodeLayout
-          Size="220,42"
+          Size="220,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Genre - STG (DB)"
           TopLeft="23.1545454545455,289.242424242424" />
         <NodeLayout
-          Size="220,42"
+          Size="220,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Item - STG (DB)"
           TopLeft="23.1545454545455,84.3333333333333" />
         <NodeLayout
-          Size="231,42"
+          Size="231.2,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)"
           TopLeft="153.323232323232,364.888888888889" />
         <NodeLayout
-          Size="220,42"
+          Size="220,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Publisher - STG (DB)"
           TopLeft="23.1545454545455,217.909090909091" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Service - STG (DB)"
           TopLeft="300.7,87.3333333333333" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload ServiceType - STG (DB)"
           TopLeft="300.7,152.333333333333" />
         <NodeLayout
-          Size="250,42"
+          Size="249.6,41.6"
           Id="Package\Sequence Container - Staging Schema\Upload Status - STG (DB)"
           TopLeft="300.7,291.333333333333" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="571,461"
-          Size="571,504"
+          PanelSize="571.2,460.8"
+          Size="571.2,504"
           Id="Package\Sequence Container - Staging Schema"
           TopLeft="78.1547619047618,186.996031746032" />
         <NodeLayout
-          Size="206,42"
+          Size="206.4,41.6"
           Id="Package\Truncate Schema Staging"
           TopLeft="260.654761904762,25.218253968254" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="363.654761904762,146.218253968254">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40.777777777778"
-              Start="0,0"
-              End="0,33.277777777778">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.277777777778" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="363.654761904762,690.996031746032">
@@ -6363,6 +6341,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="363.654761904762,146.218253968254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.777777777778"
+              Start="0,0"
+              End="0,33.277777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.277777777778" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6780,14 +6780,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\Destination - STG CustomerOrder">
     <Properties>
       <Property>
@@ -6797,6 +6789,14 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container - Staging Schema\Upload CustomerOrder - STG (DB)\CDC Source - CustomerOrder">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -7097,14 +7097,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\Destination - STG OrderDetail">
     <Properties>
       <Property>
@@ -7114,6 +7106,14 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container - Staging Schema\Upload OrderDetail - STG (DB)\CDC Source - OrderDetail">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

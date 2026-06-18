@@ -3,7 +3,7 @@
     <Configuration>
       <Name>Development</Name>
       <Options>
-        <TargetServer>localhost</TargetServer>
+        <TargetServer>SAUL\MSSQLSERVER2019</TargetServer>
         <TargetDatabase>SSAS-ProyectoIII</TargetDatabase>
         <StartObject>
           <ObjectId></ObjectId>
