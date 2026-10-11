@@ -1,5 +1,18 @@
 # IC-8078 — Almacenes de Datos y Procesamiento OLAP
 
+<p align="center">📈</p>
+
+<p align="center">
+  <img alt="SQL Server" src="https://img.shields.io/badge/SQL%20Server-CC2927?style=flat-square">
+  <img alt="SSIS" src="https://img.shields.io/badge/SSIS-CC2927?style=flat-square">
+  <img alt="SSAS" src="https://img.shields.io/badge/SSAS-CC2927?style=flat-square">
+  <img alt="Power BI" src="https://img.shields.io/badge/Power%20BI-F2C811?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="#proyecto-i-diseño-del-almacén-de-datos">Proyecto I</a> · <a href="#proyecto-ii-procesos-etl-y-cargas-incrementales">Proyecto II</a> · <a href="#proyecto-iii-cubo-olap-y-dashboards">Proyecto III</a>
+</p>
+
 Proyectos del curso Almacenes de Datos y Procesamiento OLAP (IC-8078), centrados en una solución de inteligencia de negocios para una librería. Los tres trabajos abarcan el diseño del almacén de datos, su alimentación mediante procesos ETL y la construcción de un cubo con visualizaciones para apoyar la toma de decisiones.
 
 ## Proyecto I (Diseño del almacén de datos)
