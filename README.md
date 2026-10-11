@@ -1,11 +1,11 @@
 # IC-8078 — Almacenes de Datos y Procesamiento OLAP
 
 <p align="center">
-  <img alt="SQL Server" src="https://img.shields.io/badge/SQL%20Server-CC2927?style=flat-square">
-  <img alt="SSIS" src="https://img.shields.io/badge/SSIS-CC2927?style=flat-square">
-  <img alt="SSAS" src="https://img.shields.io/badge/SSAS-CC2927?style=flat-square">
-  <img alt="Power BI" src="https://img.shields.io/badge/Power%20BI-F2C811?style=flat-square">
-  <a href="LICENSE"><img alt="Licencia GPL-3.0" src="https://img.shields.io/github/license/tonys183/IC-8078-OLAP-Proyectos?style=flat-square&label=Licencia&logo=opensourceinitiative&logoColor=white"></a>
+  <img alt="SQL Server" src="https://img.shields.io/badge/-SQL%20Server-CC2927?style=plastic">
+  <img alt="SSIS" src="https://img.shields.io/badge/-SSIS-CC2927?style=plastic">
+  <img alt="SSAS" src="https://img.shields.io/badge/-SSAS-CC2927?style=plastic">
+  <img alt="Power BI" src="https://img.shields.io/badge/-Power%20BI-F2C811?style=plastic">
+  <a href="LICENSE"><img alt="Licencia GPL-3.0" src="https://img.shields.io/github/license/tonys183/IC-8078-OLAP-Proyectos?style=plastic&label=Licencia&logo=opensourceinitiative&logoColor=white"></a>
 </p>
 
 <p align="center">
